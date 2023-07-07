@@ -51,7 +51,6 @@ public class FormularioInicioSesion extends JFrame {
                 for (Usuario auxUsuario : listaUsuario) {
                     if (rutCompleto.equalsIgnoreCase(auxUsuario.getRut())) {
                         if (contrasenia.equals(auxUsuario.getContrasenia())) {
-                            System.out.println("wenas");
                             this.menu = new FormularioMenu(listaLibro,listaUsuario);
                             dispose();
                             return;
