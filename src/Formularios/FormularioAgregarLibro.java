@@ -62,8 +62,16 @@ public class FormularioAgregarLibro extends JFrame {
         String numeroCopias = campoNCopias.getText();
         String precio = campoPrecio.getText();
         if (!isbn.isEmpty() && !titulo.isEmpty() && !autor.isEmpty() && !genero.isEmpty() && !numeroCopias.isEmpty() && !precio.isEmpty()) {
-            int copias = Integer.parseInt(numeroCopias);
-            int preciolibro = Integer.parseInt(precio);
+            int copias = 0;
+            int preciolibro = 0;
+            try {
+                copias = Integer.parseInt(numeroCopias);
+                preciolibro = Integer.parseInt(precio);
+            }catch (NumberFormatException e){
+                JOptionPane.showMessageDialog (PanelAgregarLibro, "En los datos: Numero de Copias y Precio, utilizar caracteres numericos");
+                limpiar();
+                return;
+            }
             boolean verificar = false;
             for (Libro auxLibro : listaLibro) {
                 if (isbn.equals(auxLibro.getIsbn())) {

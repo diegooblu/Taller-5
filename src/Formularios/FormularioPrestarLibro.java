@@ -96,7 +96,7 @@ public class FormularioPrestarLibro extends JFrame {
 
     public void volver() {
         dispose();
-        this.menu = new FormularioMenu(listaLibros,listaUsuarios);
+        this.menu = new FormularioMenu(listaLibros,listaUsuarios,posicion,listaReservas);
     }
 
     public void buscar() {

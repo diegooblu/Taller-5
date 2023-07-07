@@ -1,6 +1,7 @@
 package Formularios;
 
 import Entidades.Libro;
+import Entidades.LibrosReservas;
 import Entidades.Usuario;
 
 import javax.swing.*;
@@ -61,7 +62,31 @@ public class FormularioDevolverLibro extends JFrame {
     }
 
     public void devolucion() {
-
+        Usuario auxUsuario = listaUsuarios.get(posicion);
+        String isbn = campoIsbn.getText();
+        boolean verificar = false;
+        if (!isbn.isEmpty()){
+            for (Libro auxLibro : listaLibros) {
+                if(isbn.equals(auxLibro.getIsbn())){
+                    auxLibro.setCopias(auxLibro.getCopias()+1);
+                    LibrosReservas auxLibroReserva = new LibrosReservas(auxUsuario.getRut(),auxUsuario.getNombre(),
+                            auxUsuario.getApellido(),auxLibro.getIsbn(), auxLibro.getTitulo(),"devolucion");
+                    listaReservas.add(auxLibroReserva);
+                    verificar = true;
+                    break;
+                }
+            }
+            if (verificar){
+                JOptionPane.showMessageDialog(PanelDevolverLibro,"¡Devolucion exitosa!");
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(PanelDevolverLibro,"¡Libro no registrado!"
+                        + "\n" + "Si desea agregar el libro, dirigase en el menu a la pestaña agreagar.");
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(PanelDevolverLibro,"¡Por favor, rellene los campos correspondientes!");
+        }
     }
 
     public void limpiar() {
@@ -71,7 +96,7 @@ public class FormularioDevolverLibro extends JFrame {
 
     public void volver() {
         dispose();
-        this.menu = new FormularioMenu(listaLibros,listaUsuarios);
+        this.menu = new FormularioMenu(listaLibros,listaUsuarios,posicion,listaReservas);
     }
 
     public void buscar() {
