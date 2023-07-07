@@ -7,9 +7,9 @@ public class Libro {
     private String autor;
     private String genero;
     private int copias;
-    private double precio;
+    private int precio;
 
-    public Libro(String isbn, String titulo, String autor, String genero, int copias, double precio) {
+    public Libro(String isbn, String titulo, String autor, String genero, int copias, int precio) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.autor = autor;
@@ -42,7 +42,7 @@ public class Libro {
         return copias;
     }
 
-    public double getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 }

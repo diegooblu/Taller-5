@@ -16,13 +16,19 @@ public class FormularioDevolverLibro extends JFrame {
     private JButton devolucionButton;
     private JButton volverButton;
     private JButton limpiarButton;
+    private JButton buscarButton;
     private ArrayList<Libro> listaLibros;
     private ArrayList<Usuario> listaUsuarios;
+    private ArrayList<LibrosReservas> listaReservas;
+    private int posicion;
     private FormularioMenu menu;
 
-    public FormularioDevolverLibro (ArrayList<Libro> listaLibros, ArrayList<Usuario> listaUsuarios) {
+    public FormularioDevolverLibro (ArrayList<Libro> listaLibros, ArrayList<Usuario> listaUsuarios,
+                                    int posicion, ArrayList<LibrosReservas> listaReservas) {
         this.listaLibros = listaLibros;
         this.listaUsuarios = listaUsuarios;
+        this.listaReservas = listaReservas;
+        this.posicion = posicion;
         setContentPane(PanelDevolverLibro);
         setTitle("Formulario para devolver un libro.");
         setSize(600,600);
@@ -46,6 +52,12 @@ public class FormularioDevolverLibro extends JFrame {
                 volver();
             }
         });
+        buscarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscar();
+            }
+        });
     }
 
     public void devolucion() {
@@ -60,5 +72,29 @@ public class FormularioDevolverLibro extends JFrame {
     public void volver() {
         dispose();
         this.menu = new FormularioMenu(listaLibros,listaUsuarios);
+    }
+
+    public void buscar() {
+        textArea1.setText("");
+        String isbnBuscar = campoIsbn.getText();
+        boolean verificador = false;
+        if (!isbnBuscar.isEmpty()) {
+            for(Libro auxLibro : listaLibros) {
+                if (isbnBuscar.equals(auxLibro.getIsbn())) {
+                    textArea1.append("ISBN: " + auxLibro.getIsbn() + "\n");
+                    textArea1.append("Título: " + auxLibro.getTitulo() + "\n");
+                    textArea1.append("Autor: " + auxLibro.getAutor() + "\n");
+                    textArea1.append("Genero: " + auxLibro.getGenero() + "\n");
+                    textArea1.append("Número de copias: " + auxLibro.getCopias() + "\n");
+                    verificador = true;
+                }
+            }
+            if (!verificador) {
+                JOptionPane.showMessageDialog(PanelDevolverLibro, "¡ISBN no encontrado, por favor intente nuevamente");
+                campoIsbn.setText("");
+            }
+        } else {
+            JOptionPane.showMessageDialog(PanelDevolverLibro,"¡Por favor, rellene los campos correspondientes!");
+        }
     }
 }

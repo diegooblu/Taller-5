@@ -1,7 +1,9 @@
 package Formularios;
 
 import Entidades.Libro;
+import Entidades.LibrosReservas;
 import Entidades.Usuario;
+import Utils.Util;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,15 +20,19 @@ public class FormularioMenu extends JFrame{
     private JButton cerrarSesionButton;
     private ArrayList<Libro> listaLibros;
     private ArrayList<Usuario> listaUsuarios;
+    private int posicion;
+    private ArrayList<LibrosReservas> listaReservas;
     private FormularioBuscarLibro buscarLibro;
     private FormularioAgregarLibro agregarLibro;
     private FormularioPrestarLibro prestarLibro;
     private FormularioDevolverLibro devolverLibro;
     private FormularioInicioSesion inicioSesion;
 
-    public FormularioMenu(ArrayList<Libro> listaLibro, ArrayList<Usuario> listaUsuarios) {
+    public FormularioMenu(ArrayList<Libro> listaLibro, ArrayList<Usuario> listaUsuarios, int posicion, ArrayList<LibrosReservas> listaReservas) {
         this.listaLibros = listaLibro;
         this.listaUsuarios = listaUsuarios;
+        this.posicion = posicion;
+        this.listaReservas = listaReservas;
         setContentPane(PanelMenu);
         setSize(600,600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -68,18 +74,18 @@ public class FormularioMenu extends JFrame{
         });
     }
     public void buscarLibro(){
-        this.buscarLibro = new FormularioBuscarLibro(listaLibros,listaUsuarios);
+        this.buscarLibro = new FormularioBuscarLibro(listaLibros,listaUsuarios,posicion,listaReservas);
     }
     public void prestarLibro() {
-        this.prestarLibro = new FormularioPrestarLibro(listaLibros,listaUsuarios);
+        this.prestarLibro = new FormularioPrestarLibro(listaLibros,listaUsuarios,posicion,listaReservas);
     }
     public void agregarLibro(){
-        this.agregarLibro = new FormularioAgregarLibro(listaLibros,listaUsuarios);
+        this.agregarLibro = new FormularioAgregarLibro(listaLibros,listaUsuarios,posicion,listaReservas);
     }
     public void devolverLibro() {
-        this.devolverLibro = new FormularioDevolverLibro(listaLibros,listaUsuarios);
+        this.devolverLibro = new FormularioDevolverLibro(listaLibros,listaUsuarios,posicion,listaReservas);
     }
     public void cerrarSesion() {
-        this.inicioSesion = new FormularioInicioSesion(listaUsuarios,listaLibros);
+        this.inicioSesion = new FormularioInicioSesion(listaUsuarios,listaLibros,listaReservas);
     }
 }

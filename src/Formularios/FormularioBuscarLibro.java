@@ -17,11 +17,15 @@ public class FormularioBuscarLibro extends JFrame {
     private JButton volverButton;
     private ArrayList<Libro> listaLibros;
     private ArrayList<Usuario> listaUsuarios;
+    private ArrayList<LibrosReservas> listaReservas;
+    private int posicion;
     private FormularioMenu menu;
 
-    public FormularioBuscarLibro (ArrayList<Libro> listaLibros, ArrayList<Usuario> listaUsuarios) {
+    public FormularioBuscarLibro (ArrayList<Libro> listaLibros, ArrayList<Usuario> listaUsuarios, int posicion, ArrayList<LibrosReservas> listaReservas) {
         this.listaLibros = listaLibros;
         this.listaUsuarios = listaUsuarios;
+        this.listaReservas = listaReservas;
+        this.posicion = posicion;
         setContentPane(PanelBuscar);
         setSize(600,600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -69,6 +73,6 @@ public class FormularioBuscarLibro extends JFrame {
 
     public void volver() {
         dispose();
-        this.menu = new FormularioMenu(listaLibros,listaUsuarios);
+        this.menu = new FormularioMenu(listaLibros,listaUsuarios,posicion,listaReservas);
     }
 }

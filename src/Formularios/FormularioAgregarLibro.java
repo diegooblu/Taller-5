@@ -1,8 +1,8 @@
 package Formularios;
 
 import Entidades.Libro;
+import Entidades.LibrosReservas;
 import Entidades.Usuario;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,11 +21,15 @@ public class FormularioAgregarLibro extends JFrame {
     private JTextField campoPrecio;
     private ArrayList<Libro> listaLibro;
     private ArrayList<Usuario> listaUsuario;
+    private ArrayList<LibrosReservas> listaReservas;
+    private int posicion;
     private FormularioMenu menu;
 
-    public FormularioAgregarLibro (ArrayList<Libro> listaLibros, ArrayList<Usuario> listaUsuario) {
+    public FormularioAgregarLibro (ArrayList<Libro> listaLibros, ArrayList<Usuario> listaUsuario, int posicion, ArrayList<LibrosReservas> listaReservas) {
         this.listaLibro = listaLibros;
         this.listaUsuario = listaUsuario;
+        this.posicion = posicion;
+        this.listaReservas = listaReservas;
         setContentPane(PanelAgregarLibro);
         setSize(600,600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -91,6 +95,6 @@ public class FormularioAgregarLibro extends JFrame {
 
     public void volver() {
         dispose();
-        this.menu = new FormularioMenu(listaLibro,listaUsuario);
+        this.menu = new FormularioMenu(listaLibro,listaUsuario,posicion,listaReservas);
     }
 }

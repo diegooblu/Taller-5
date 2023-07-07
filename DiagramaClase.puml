@@ -1,11 +1,57 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+package Entidades {
 
-autonumber
+Class Usuario {
+-Nombre : String
+-Apellido : String
+-Rut : String
+-Contrasenia : String
++ Usuario (Nombre : String, Apellido : String, Rut : String, Contrasenia : String)
++ Gets & Sets ()
+}
+Usuario --> "0..*"Libro
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+Class Libro {
+-ISBN : String
+-Titulo : String
+-Autor : String
+-Genero : String
+-Copia : int
++Libro (ISBN : String, Titulo : String, Autor : String, Genero : String, Copia : int)
++Gets & Sets ()
+}
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+}
+
+package Sistema {
+
+Class SistemaIMPL{
+-ArrayList listaUsuarios <Usuario>
+-ArrayList listaLibros <Libro>
++InterfaceIMPL()
++inicarprograma()
+}
+SistemaIMPL --> Usuario
+SistemaIMPL --> Libro
+
+Interface Interface{
+-AgregarLibro() : void
+-BuscarLibro() : void
+-DevolverLbro() : void
+-PrestarLibro() : void
+-InicioSecion() : void
+-Menu () : void
+}
+
+}
+
+package Utils {
+
+Class Util {
+-leerArchivoLibros(): void
+-leerArchivoUsuarios(): void
+}
+Util -left->  SistemaIMPL
+
+}
 @enduml
