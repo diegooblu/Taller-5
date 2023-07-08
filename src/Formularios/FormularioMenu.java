@@ -41,6 +41,7 @@ public class FormularioMenu extends JFrame{
         this.posicion = posicion;
         this.listaReservas = listaReservas;
         setContentPane(PanelMenu);
+        setTitle("Formulario menu principal.");
         setSize(600,600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);

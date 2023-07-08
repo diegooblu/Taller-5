@@ -39,6 +39,7 @@ public class FormularioAgregarLibro extends JFrame {
         this.posicion = posicion;
         this.listaReservas = listaReservas;
         setContentPane(PanelAgregarLibro);
+        setTitle("Formulario para agregar un libro.");
         setSize(600,600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);

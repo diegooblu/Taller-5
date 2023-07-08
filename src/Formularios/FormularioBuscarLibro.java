@@ -36,6 +36,7 @@ public class FormularioBuscarLibro extends JFrame {
         this.listaReservas = listaReservas;
         this.posicion = posicion;
         setContentPane(PanelBuscar);
+        setTitle("Formulario de busqueda de un libro.");
         setSize(600,600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
