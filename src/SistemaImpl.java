@@ -8,11 +8,15 @@ import java.util.ArrayList;
 
 public class SistemaImpl implements Sistema{
 
-    private ArrayList<Usuario> listaUsuario;
-    private ArrayList<Libro> listaLibro;
-    private ArrayList<LibrosReservas> listaReservas;
+    private final ArrayList<Usuario> listaUsuario;
+    private final ArrayList<Libro> listaLibro;
+    private final ArrayList<LibrosReservas> listaReservas;
     private FormularioInicioSesion inicioSesion;
 
+    /**
+     *Subprograma base, se crean e inician los arreglos a utilizar, ademas de leer los archivos
+     * necesarios para la implementacion del codigo.
+     */
     public SistemaImpl() {
         this.listaUsuario = new ArrayList<>();
         this.listaLibro = new ArrayList<>();
@@ -22,7 +26,12 @@ public class SistemaImpl implements Sistema{
         Util.leerArchivosReservas(listaReservas);
     }
 
-    public void IniciarSistema() {
+    /**
+     *Subprograma que inicia el formulario de inicio de sesion, el cual da paso a todos los siguientes, donde
+     * el usuario podra navegar y realizar acciones.
+     */
+    @Override
+    public void iniciarSistema() {
         this.inicioSesion = new FormularioInicioSesion(listaUsuario,listaLibro,listaReservas);
     }
 }

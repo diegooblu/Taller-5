@@ -2,12 +2,12 @@ package Entidades;
 
 public class LibrosReservas {
 
-    private String rut;
-    private String nombre;
-    private String apellido;
-    private String ISBN;
-    private String titulo;
-    private String accion;
+    private final String rut;
+    private final String nombre;
+    private final String apellido;
+    private final String ISBN;
+    private final String titulo;
+    private final String accion;
 
     public LibrosReservas(String rut, String nombre, String apellido, String ISBN, String titulo, String accion) {
         this.rut = rut;

@@ -18,16 +18,23 @@ public class FormularioMenu extends JFrame{
     private JButton agregarLibroButton;
     private JButton devolverLibroButton;
     private JButton cerrarSesionButton;
-    private ArrayList<Libro> listaLibros;
-    private ArrayList<Usuario> listaUsuarios;
-    private int posicion;
-    private ArrayList<LibrosReservas> listaReservas;
+    private final ArrayList<Libro> listaLibros;
+    private final ArrayList<Usuario> listaUsuarios;
+    private final int posicion;
+    private final ArrayList<LibrosReservas> listaReservas;
     private FormularioBuscarLibro buscarLibro;
     private FormularioAgregarLibro agregarLibro;
     private FormularioPrestarLibro prestarLibro;
     private FormularioDevolverLibro devolverLibro;
     private FormularioInicioSesion inicioSesion;
 
+    /**
+     * Constructor de la clase, que ademas dara inicio al formulario central que seria el menu.
+     * @param listaLibro usado para poder llevar la informacion de los libros a travez de los formularios.
+     * @param listaUsuarios usado para poder traspasar informacion del usuario medianto los formularios.
+     * @param posicion usado para poder traspasar la posicion del usuario mediante los formularios.
+     * @param listaReservas que contendra los libros que hayan sido prestados o devueltos con anterioridad.
+     */
     public FormularioMenu(ArrayList<Libro> listaLibro, ArrayList<Usuario> listaUsuarios, int posicion, ArrayList<LibrosReservas> listaReservas) {
         this.listaLibros = listaLibro;
         this.listaUsuarios = listaUsuarios;
@@ -73,19 +80,40 @@ public class FormularioMenu extends JFrame{
             }
         });
     }
+
+    /**
+     * Metodo que derivara al usuario al formulario de buscarLibro.
+     */
     public void buscarLibro(){
         this.buscarLibro = new FormularioBuscarLibro(listaLibros,listaUsuarios,posicion,listaReservas);
     }
+
+    /**
+     * Metodo que derivara al usuario al formulario de prestarLibro.
+     */
     public void prestarLibro() {
         this.prestarLibro = new FormularioPrestarLibro(listaLibros,listaUsuarios,posicion,listaReservas);
     }
+
+    /**
+     * Metodo que derivara al usuario al formulario de agregarLibro.
+     */
     public void agregarLibro(){
         this.agregarLibro = new FormularioAgregarLibro(listaLibros,listaUsuarios,posicion,listaReservas);
     }
+
+    /**
+     * Metodo que derivara al usuario al formulario de devolverLirbo.
+     */
     public void devolverLibro() {
         this.devolverLibro = new FormularioDevolverLibro(listaLibros,listaUsuarios,posicion,listaReservas);
     }
+
+    /**
+     * Metodo que cerrara el formulario de menu y derivara al usuario al formulario de iniciarSesion.
+     */
     public void cerrarSesion() {
+
         this.inicioSesion = new FormularioInicioSesion(listaUsuarios,listaLibros,listaReservas);
     }
 }

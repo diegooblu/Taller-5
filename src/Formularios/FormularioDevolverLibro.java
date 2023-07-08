@@ -18,12 +18,19 @@ public class FormularioDevolverLibro extends JFrame {
     private JButton volverButton;
     private JButton limpiarButton;
     private JButton buscarButton;
-    private ArrayList<Libro> listaLibros;
-    private ArrayList<Usuario> listaUsuarios;
-    private ArrayList<LibrosReservas> listaReservas;
-    private int posicion;
+    private final ArrayList<Libro> listaLibros;
+    private final ArrayList<Usuario> listaUsuarios;
+    private final ArrayList<LibrosReservas> listaReservas;
+    private final int posicion;
     private FormularioMenu menu;
 
+    /**
+     * Constructor de la clase, donde se inicia el formulario devolverLibro.
+     * @param listaLibros de la cual se tomara la informacion del libro a devolver.
+     * @param listaUsuarios donde se tomara la informacion del usuario que realizo la devolucion.
+     * @param posicion del usuario para encontrarlo en la listaUsuarios.
+     * @param listaReservas en el cual se guardara el libro que se devolvio con sus datos correspondientes.
+     */
     public FormularioDevolverLibro (ArrayList<Libro> listaLibros, ArrayList<Usuario> listaUsuarios,
                                     int posicion, ArrayList<LibrosReservas> listaReservas) {
         this.listaLibros = listaLibros;
@@ -61,9 +68,13 @@ public class FormularioDevolverLibro extends JFrame {
         });
     }
 
+    /**
+     * Subprograma que permitira al usuario realizar una devolucion de un libro si este existe.
+     */
     public void devolucion() {
         Usuario auxUsuario = listaUsuarios.get(posicion);
         String isbn = campoIsbn.getText();
+        //Variable que se utilizara para poder saber si la accion se llevo a cabo o no.
         boolean verificar = false;
         if (!isbn.isEmpty()){
             for (Libro auxLibro : listaLibros) {
@@ -78,30 +89,42 @@ public class FormularioDevolverLibro extends JFrame {
             }
             if (verificar){
                 JOptionPane.showMessageDialog(PanelDevolverLibro,"¡Devolucion exitosa!");
-                dispose();
+                volver();
             } else {
+                //Mensaje de fallo, y se le da una recomendacion al usuario.
                 JOptionPane.showMessageDialog(PanelDevolverLibro,"¡Libro no registrado!"
                         + "\n" + "Si desea agregar el libro, dirigase en el menu a la pestaña agreagar.");
             }
         }
         else {
-            JOptionPane.showMessageDialog(PanelDevolverLibro,"¡Por favor, rellene los campos correspondientes!");
+            JOptionPane.showMessageDialog(PanelDevolverLibro,"¡Por favor rellene los campos correspondientes!",
+                    "CUIDADO", JOptionPane.WARNING_MESSAGE);
         }
     }
 
+    /**
+     * Metodo que servira para limpiar la informacion del formulario, lo puede iniciar el usuario tanto como el sistema.
+     */
     public void limpiar() {
         campoIsbn.setText("");
         textArea1.setText("");
     }
 
+    /**
+     * Metodo que permitira volver al formulario anterior si asi lo desea el usuario.
+     */
     public void volver() {
         dispose();
         this.menu = new FormularioMenu(listaLibros,listaUsuarios,posicion,listaReservas);
     }
 
+    /**
+     * Metodo en el cual el usuario podra buscar el libro que quiera buscar, para corroborar la informacion del mismo.
+     */
     public void buscar() {
         textArea1.setText("");
         String isbnBuscar = campoIsbn.getText();
+        //Variable que se utilizara para poder saber si la accion se llevo a cabo o no.
         boolean verificador = false;
         if (!isbnBuscar.isEmpty()) {
             for(Libro auxLibro : listaLibros) {
@@ -115,11 +138,13 @@ public class FormularioDevolverLibro extends JFrame {
                 }
             }
             if (!verificador) {
-                JOptionPane.showMessageDialog(PanelDevolverLibro, "¡ISBN no encontrado, por favor intente nuevamente");
+                JOptionPane.showMessageDialog(PanelDevolverLibro,"¡ISBN no encontrado, " +
+                        "por favor intente nuevamente!","ERROR", JOptionPane.ERROR_MESSAGE);
                 campoIsbn.setText("");
             }
         } else {
-            JOptionPane.showMessageDialog(PanelDevolverLibro,"¡Por favor, rellene los campos correspondientes!");
+            JOptionPane.showMessageDialog(PanelDevolverLibro,"¡Por favor rellene los campos correspondientes!",
+                    "CUIDADO", JOptionPane.WARNING_MESSAGE);
         }
     }
 }

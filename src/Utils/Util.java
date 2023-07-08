@@ -5,7 +5,6 @@ import Entidades.LibrosReservas;
 import Entidades.Usuario;
 import ucn.ArchivoSalida;
 import ucn.Registro;
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -22,7 +21,6 @@ public class Util {
      * Método encargado de leer el archivo de "libros.txt".
      */
     public static void leerArchivoLibros(ArrayList<Libro> listaLibros) {
-
         // Leer el archivo "libros.txt"
         try (BufferedReader br = new BufferedReader(new FileReader("libros.txt"))) {
             String line;
@@ -34,18 +32,6 @@ public class Util {
                 String category = chain[3];
                 int copies = Integer.parseInt(chain[4]);
                 int price = Integer.parseInt(chain[5]);
-
-                //TODO: Eliminar los print, solo están de prueba para saber si el archivo se leyó correctamente.
-                /*
-                System.out.println("ISBN: " + isbn);
-                System.out.println("Título: " + title);
-                System.out.println("Autor: " + author);
-                System.out.println("Categoría: " + category);
-                System.out.println("Número de copias: " + copies);
-                System.out.println("Precio: " + price);
-                System.out.println("-----------------------------");
-                */
-
                 //TODO: Guardar el libro en algúna estructura de datos.
                 Libro libro = new Libro(isbn,title,author,category,copies,price);
                 listaLibros.add(libro);
@@ -59,7 +45,6 @@ public class Util {
      * Método encargado de leer el archivo de "usuarios.txt".
      */
     public static void leerArchivoUsuarios(ArrayList<Usuario> listaUsuario) {
-
         // Leer el archivo "usuarios.txt"
         try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
             String line;
@@ -69,16 +54,6 @@ public class Util {
                 String name = chain[1];
                 String lastname = chain[2];
                 String password = chain[3];
-
-                /*
-                //TODO: Eliminar los print, solo están de prueba para saber si el archivo se leyó correctamente.
-                System.out.println("RUT: " + rut);
-                System.out.println("Nombre: " + name);
-                System.out.println("Apellido: " + lastname);
-                System.out.println("Contraseña: " + password);
-                System.out.println("-----------------------------");
-                 */
-
                 //TODO: Guardar el usuario en algúna estructura de datos.
                 Usuario usuario = new Usuario(rut,name,lastname,password);
                 listaUsuario.add(usuario);
@@ -88,6 +63,10 @@ public class Util {
         }
     }
 
+    /**
+     * Metodo encargado de leer el archivo de "reservas.txt".
+     * @param listaLibrosReservados donde estaran los datos a leer.
+     */
     public static void leerArchivosReservas(ArrayList<LibrosReservas> listaLibrosReservados) {
         // Leer el archivo "usuarios.txt"
         try (BufferedReader br = new BufferedReader(new FileReader("reservas.txt"))) {
@@ -100,7 +79,6 @@ public class Util {
                 String isbn = chain[3];
                 String titulo = chain[4];
                 String accion = chain[5];
-
                 LibrosReservas libroReservado = new LibrosReservas(rut,name,lastname,isbn,titulo,accion);
                 listaLibrosReservados.add(libroReservado);
             }
@@ -109,8 +87,13 @@ public class Util {
         }
     }
 
+    /**
+     * Metodo encargado de realizar la escritura del archivo "reservas.txt".
+     * @param listaReservas donde estaran los datos a reescribir en .txt.
+     */
     public static void escrituraArchivosReservas(ArrayList<LibrosReservas> listaReservas) {
         try {
+            //Utilizamos el metodo de ArchivoSalida, esto por algunoss problemas con BufferedWriter
             ArchivoSalida archSal = new ArchivoSalida("reservas.txt");
             for (LibrosReservas auxReserva : listaReservas) {
                 Registro regSal = new Registro(6);
@@ -128,8 +111,14 @@ public class Util {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Metodo encargado de la escritura del archivo "libros.txt".
+     * @param listaLibros con los datos a escribir en .txt.
+     */
     public static void escrituraLibros(ArrayList<Libro> listaLibros){
         try {
+            //Utilizamos el metodo de ArchivoSalida, esto por algunoss problemas con BufferedWriter
             ArchivoSalida archSal = new ArchivoSalida("libros.txt");
             for (Libro auxLibro : listaLibros) {
                 Registro regSal = new Registro(6);

@@ -1,10 +1,10 @@
 package Entidades;
 
 public class Usuario {
-    private String rut;
-    private String nombre;
-    private String apellido;
-    private String contrasenia;
+    private final String rut;
+    private final String nombre;
+    private final String apellido;
+    private final String contrasenia;
 
     public Usuario(String rut, String nombre, String apellido, String contrasenia) {
         this.rut = rut;

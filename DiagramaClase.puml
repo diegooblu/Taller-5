@@ -1,57 +1,88 @@
 @startuml
+
+package BibliotechGrafica {
+
+Class listaUsuarios {
+-listaUsuarios: ArrayList<Usuario>
+}
+
+Class listaLibros {
+-listaLibros: ArrayList<Libro>
+}
+
+Class listaReservas {
+-listaReservas: ArrayList<LibrosReservas>
+}
+
 package Entidades {
 
 Class Usuario {
--Nombre : String
--Apellido : String
--Rut : String
--Contrasenia : String
-+ Usuario (Nombre : String, Apellido : String, Rut : String, Contrasenia : String)
-+ Gets & Sets ()
+-nombre : String
+-apellido : String
+-rut : String
+-contrasenia : String
++Usuario (Nombre : String, Apellido : String, Rut : String, Contrasenia : String)
++Gets & Sets ()
 }
-Usuario --> "0..*"Libro
+Usuario "1" --> "*" LibrosReservas : Tiene
+listaUsuarios o--> "*" Usuario
 
 Class Libro {
--ISBN : String
--Titulo : String
--Autor : String
--Genero : String
--Copia : int
+-isbn : String
+-titulo : String
+-autor : String
+-genero : String
+-copia : int
 +Libro (ISBN : String, Titulo : String, Autor : String, Genero : String, Copia : int)
 +Gets & Sets ()
 }
+Libro "1" --> "1" LibrosReservas : Se convierte
+listaLibros o--> "*" Libro
 
+Class LibrosReservas {
+-rut: String
+-nombre: String
+-apellido: String
+-isbn: String
+-titulo: String
+-accion: String
++LibrosReservas (rut: String, nombre: String, apellido: String,
+ isbn: String, titulo: String, accion: String)
++Gets & Sets ()
+}
+listaReservas o--> "*" LibrosReservas
 }
 
 package Sistema {
 
 Class SistemaIMPL{
--ArrayList listaUsuarios <Usuario>
--ArrayList listaLibros <Libro>
+-listaUsuarios: ArrayList<Usuario>
+-listaLibros: ArrayList<Libro>
+-listaReservas: ArrayList<LibrosReservas>
 +InterfaceIMPL()
-+inicarprograma()
 }
-SistemaIMPL --> Usuario
-SistemaIMPL --> Libro
+SistemaIMPL --> listaUsuarios
+SistemaIMPL --> listaLibros
+SistemaIMPL --> listaReservas
 
-Interface Interface{
--AgregarLibro() : void
--BuscarLibro() : void
--DevolverLbro() : void
--PrestarLibro() : void
--InicioSecion() : void
--Menu () : void
+Interface Sistema{
++iniciarPrograma(): void
 }
+SistemaIMPL..|> Sistema
 
 }
 
 package Utils {
 
 Class Util {
--leerArchivoLibros(): void
--leerArchivoUsuarios(): void
++lecturaArchivoLibros(): void
++lecturaArchivoUsuarios(): void
++lecturaArchivosReserva(): void
++escrituraArchivoLibros(): void
++escrituraArchivoReserva(): void
 }
 Util -left->  SistemaIMPL
 
+}
 }
 @enduml

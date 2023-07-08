@@ -2,12 +2,12 @@ package Entidades;
 
 public class Libro {
 
-    private String isbn;
-    private String titulo;
-    private String autor;
-    private String genero;
+    private final String isbn;
+    private final String titulo;
+    private final String autor;
+    private final String genero;
     private int copias;
-    private int precio;
+    private final int precio;
 
     public Libro(String isbn, String titulo, String autor, String genero, int copias, int precio) {
         this.isbn = isbn;
